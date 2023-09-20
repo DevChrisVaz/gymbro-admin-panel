@@ -59,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({ }) => {
 					</div>
 				</div>
 				<div className="flex items-center gap-6">
-					<Button onClick={() => {}}>Sign In</Button>
+					<Button onClick={() => {}} className="bg-gradient text-white">Sign In</Button>
 					{
 						isOpen ?
 							<FiX onClick={toggleMenu} className="text-primary text-3xl cursor-pointer md:hidden" />
