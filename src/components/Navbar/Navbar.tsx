@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import { Button } from '../ui/Button';
-import { NavLinkProps, NavbarProps } from './types';
+import { NavLinkProps, NavbarProps } from './Navbar.d';
 import { usePathname } from 'next/navigation';
 import { FiMenu, FiX } from 'react-icons/fi';
 
@@ -12,11 +12,11 @@ const NavLink: React.FC<NavLinkProps> = (props) => {
 	const pathname = usePathname();
 
 	const isActive = (): string => {
-		return pathname === props.to ? 'text-dark-green' : '';
+		return pathname === props.to ? 'text-primary' : '';
 	};
 
 	return (
-		<Link href={props.to} className={`${isActive()} "hover:text-dark-green"`}>{props.children}</Link>
+		<Link href={props.to} className={`${isActive()} hover:text-primary`}>{props.children}</Link>
 	);
 }
 
@@ -26,20 +26,20 @@ const Navbar: React.FC<NavbarProps> = ({ }) => {
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
-		menuRef.current!.classList.toggle("top-[12%]")
+		menuRef.current!.classList.toggle("top-[72px]")
 	};
 
 	return (
-		<nav className="flex justify-between items-center md:px-8 lg:px-12 xl:px-16 px-5 py-3 shadow-xl">
+		<nav className="bg-light dark:bg-dark flex justify-between items-center md:px-8 lg:px-12 xl:px-16 px-5 py-3 shadow-md">
 			<div>
 				<Link href="/">
-					<Image src="/img/logo/horizontal-logo.svg" alt="GymBro" width={150} height={0} />
+					<Image src="/img/logo/horizontal-logo.svg" alt="GYMBRO" width={150} height={0} layout="intrinsic" />
 				</Link>
 			</div>
 			<div className="flex">
-				<div ref={menuRef} className="duration-500 md:static absolute bg-white md:min-h-fit min-h-screen left-0 top-[-100%] md:w-auto w-full flex md:flex-row flex-col md:items-center gap-10 px-5">
+				<div ref={menuRef} className="dark:bg-dark dark:text-white duration-500 md:static absolute bg-light md:min-h-fit min-h-screen left-0 top-[-100%] md:w-auto w-full flex md:flex-row flex-col md:items-center gap-10 px-5">
 					<div>
-						<ul className="flex md:flex-row flex-col md:items-center md:gap-10 gap-8">
+						<ul className="flex md:flex-row flex-col md:items-center md:gap-10 gap-8 pt-5 md:pt-0">
 							<li>
 								<NavLink to="/">Home</NavLink>
 							</li>
@@ -59,12 +59,12 @@ const Navbar: React.FC<NavbarProps> = ({ }) => {
 					</div>
 				</div>
 				<div className="flex items-center gap-6">
-					<Button>Sign In</Button>
+					<Button onClick={() => {}}>Sign In</Button>
 					{
 						isOpen ?
-							<FiX onClick={toggleMenu} className="text-3xl cursor-pointer md:hidden" />
+							<FiX onClick={toggleMenu} className="text-primary text-3xl cursor-pointer md:hidden" />
 							:
-							<FiMenu onClick={toggleMenu} className="text-3xl cursor-pointer md:hidden" />
+							<FiMenu onClick={toggleMenu} className="text-primary text-3xl cursor-pointer md:hidden" />
 					}
 				</div>
 			</div>
