@@ -7,6 +7,11 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      'light-green': '#79DFB5',
+      'dark-green': '#27BE82',
+      'dark': '#111111'
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -18,5 +23,6 @@ const config: Config = {
   plugins: [
     
   ],
+  darkMode: 'class'
 }
 export default config
