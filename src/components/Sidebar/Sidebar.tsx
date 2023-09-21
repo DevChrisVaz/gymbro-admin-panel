@@ -43,10 +43,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
 
 	return (
-		<div ref={sidebarRef} className={`h-screen ${isVisible ? 'w-[250px]' : 'w-11'} bg-gray-800 text-white fixed top-0 left-0 transition-all duration-300 overflow-hidden`}>
-			<div className="flex items-center justify-between p-2">
+		<div ref={sidebarRef} className={`h-screen ${isVisible ? 'w-[250px]' : 'w-[62px]'} bg-light dark:bg-dark border-r border-r-primary-500 text-white fixed top-0 left-0 transition-all duration-300 overflow-hidden`}>
+			<div className="flex items-center justify-between py-4 px-2">
 				<a href='/dashboard' className="focus:outline-none">
-					<Image className="min-w-[150px]" src="/img/logo/horizontal-logo.svg" alt='GYMBRO' width={150} height={0} />
+					<Image className="min-w-[160px]" src="/img/logo/horizontal-logo.svg" alt='GYMBRO' width={160} height={0} />
 				</a>
 				{isOpen ? (
 					<button onClick={toggleSidebar} className="text-xl focus:outline-none">
@@ -73,7 +73,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
 const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 	const [isOpen, setIsOpen] = useState<boolean>(props.item.isOpen ?? false);
-	const [dropdownSize, setDropdownSize] = useState<number>(0);
 
 	const dropdownItemsContainerRef = useRef<HTMLUListElement>(null);
 
@@ -99,7 +98,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 			{
 				props.item.items ?
 					<div className="py-2 px-4 flex items-center cursor-pointer" onClick={toggleOpen}>
-						<span className="mr-4">{props.item.icon}</span>
+						<span className="mr-6">{props.item.icon}</span>
 						{props.item.label}
 						<div
 							onClick={(e) => {
@@ -113,7 +112,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 					</div>
 					:
 					<a href={props.item.url} className="py-2 px-4 flex items-center">
-						<span className="mr-4">{props.item.icon}</span>
+						<span className="mr-6">{props.item.icon}</span>
 						{props.item.label}
 					</a>
 			}
