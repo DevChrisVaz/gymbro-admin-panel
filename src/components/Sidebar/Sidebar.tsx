@@ -44,7 +44,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
 	return (
 		<div ref={sidebarRef} className={`h-screen ${isVisible ? 'w-[250px]' : 'w-[62px]'} bg-light dark:bg-dark border-r border-r-primary-500 text-white fixed top-0 left-0 transition-all duration-300 overflow-hidden`}>
-			<div className="flex items-center justify-between py-4 px-2">
+			<div className="flex items-center justify-between py-4 pl-2 pr-4">
 				<a href='/dashboard' className="focus:outline-none">
 					<Image className="min-w-[160px]" src="/img/logo/horizontal-logo.svg" alt='GYMBRO' width={160} height={0} />
 				</a>
@@ -119,7 +119,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 			{props.item.items && (
 				<ul ref={dropdownItemsContainerRef} className="h-0 overflow-hidden duration-300">
 					{props.item.items.map((item) => (
-						<li key={item.label} className="pl-12 dark:bg-dark dark:hover:bg-dark-gray-soft">
+						<li key={item.label} className="pl-14 dark:bg-dark dark:hover:bg-dark-gray-soft">
 							<a href={item.url} className="py-2 px-4 flex items-center">
 								{item.label}
 							</a>
