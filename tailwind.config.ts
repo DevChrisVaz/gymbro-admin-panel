@@ -23,7 +23,8 @@ const config: Config = {
       'white': '#FFFFFF',
       'light-green': '#7CD8B3',
       'dark-green': '#26BE81',
-      'dark-gray': '#111111'
+      'dark-gray': '#111111',
+      'dark-gray-soft': '#2d2d2d',
     },
     extend: {
       textColor: {
