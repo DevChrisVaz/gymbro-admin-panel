@@ -99,7 +99,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 				props.item.items ?
 					<div className="py-2 px-4 flex items-center cursor-pointer" onClick={toggleOpen}>
 						<span className="mr-6">{props.item.icon}</span>
-						{props.item.label}
+						<span className="text-dark-gray dark:text-white">{props.item.label}</span>
 						<div
 							onClick={(e) => {
 								e.preventDefault();
@@ -113,17 +113,13 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 					:
 					<a href={props.item.url} className="py-2 px-4 flex items-center">
 						<span className="mr-6">{props.item.icon}</span>
-						{props.item.label}
+						<span className="text-dark-gray dark:text-white">{props.item.label}</span>
 					</a>
 			}
 			{props.item.items && (
 				<ul ref={dropdownItemsContainerRef} className="h-0 overflow-hidden duration-300">
 					{props.item.items.map((item) => (
-						<li key={item.label} className="pl-14 dark:bg-dark dark:hover:bg-dark-gray-soft">
-							<a href={item.url} className="py-2 px-4 flex items-center">
-								{item.label}
-							</a>
-						</li>
+						<SidebarLink isSidebarOpen={props.isSidebarOpen} item={item} />
 					))}
 				</ul>
 			)}
