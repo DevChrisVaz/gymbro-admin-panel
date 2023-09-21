@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import { Button } from '../ui/Button';
 import { NavLinkProps, NavbarProps } from './Navbar.d';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 const NavLink: React.FC<NavLinkProps> = (props) => {
@@ -22,7 +22,9 @@ const NavLink: React.FC<NavLinkProps> = (props) => {
 
 const Navbar: React.FC<NavbarProps> = ({ }) => {
 	const [isOpen, setIsOpen] = useState(false);
+	
 	const menuRef = useRef<HTMLDivElement>(null);
+	const router = useRouter();
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
@@ -59,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ }) => {
 					</div>
 				</div>
 				<div className="flex items-center gap-6">
-					<Button onClick={() => {}} className="bg-gradient text-white">Sign In</Button>
+						<Button onClick={() => router.push("/login")} className="bg-gradient text-white">Sign In</Button>
 					{
 						isOpen ?
 							<FiX onClick={toggleMenu} className="text-primary text-3xl cursor-pointer md:hidden" />

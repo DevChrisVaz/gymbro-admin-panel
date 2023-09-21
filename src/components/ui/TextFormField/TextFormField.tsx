@@ -28,7 +28,7 @@ const TextFormField: React.FC<TextFormFieldProps> = (props) => {
 			<div className="w-full flex dark:bg-dark bg-light rounded-md overflow-hidden">
 				{
 					props.prefixIcon &&
-					<div className="w-[40px] flex items-center justify-center text-primary">
+					<div className="w-[45px] flex items-center justify-center text-primary">
 						{props.prefixIcon}
 					</div>
 				}
@@ -45,7 +45,7 @@ const TextFormField: React.FC<TextFormFieldProps> = (props) => {
 			</div>
 			<label
 				className={`absolute left-2 transition-all duration-300 cursor-text ${isFocused || inputValue ? 'top-1 text-xs text-primary' : 'top-2 text-sm text-dark-gray dark:text-white'
-					} ${props.prefixIcon && 'left-[40px]'}`}
+					} ${props.prefixIcon && 'left-[45px]'}`}
 				htmlFor={props.name}
 			>
 				{props.label}

@@ -35,7 +35,7 @@ const PasswordFormField: React.FC<PasswordFormFieldProps> = (props) => {
 			<div className="w-full flex dark:bg-dark bg-light rounded-md overflow-hidden">
 				{
 					props.prefixIcon &&
-					<div className="w-[40px] flex items-center justify-center text-primary">
+					<div className="w-[45px] flex items-center justify-center text-primary">
 						{props.prefixIcon}
 					</div>
 				}
@@ -52,7 +52,7 @@ const PasswordFormField: React.FC<PasswordFormFieldProps> = (props) => {
 			</div>
 			<label
 				className={`absolute left-2 transition-all duration-300 cursor-text ${isFocused || inputValue ? 'top-1 text-xs text-primary' : 'top-2 text-sm text-dark-gray dark:text-white'
-					} ${props.prefixIcon && 'left-[40px]'}`}
+					} ${props.prefixIcon && 'left-[45px]'}`}
 				htmlFor={props.name}
 			>
 				{props.label}
@@ -62,7 +62,7 @@ const PasswordFormField: React.FC<PasswordFormFieldProps> = (props) => {
 				onClick={togglePasswordVisibility}
 				className="absolute inset-y-0 right-2 px-2 py-1 bg-gray-200 text-gray-700 rounded-md focus:outline-none hover:bg-gray-300"
 			>
-				{showPassword ? <BsEyeSlashFill className="text-primary" /> : <BsEyeFill className="text-dark-grey dark:text-white" />}
+				{showPassword ? <BsEyeSlashFill className="text-white" /> : <BsEyeFill className="text-dark-grey dark:text-primary" />}
 			</button>
 		</div>
 	);
