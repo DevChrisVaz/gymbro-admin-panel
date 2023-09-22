@@ -60,11 +60,12 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 			</div>
 			<ul className={`py-2 w-full`}>
 				{props.links.map((link, index) => (
-					<SidebarLink
-						key={index}
-						item={link}
-						isSidebarOpen={isVisible}
-					/>
+					<li key={index} className="w-full dark:bg-dark dark:hover:bg-dark-gray-soft">
+						<SidebarLink
+							item={link}
+							isSidebarOpen={isVisible}
+						/>
+					</li>
 				))}
 			</ul>
 		</div>
@@ -94,7 +95,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 
 
 	return (
-		<li className="w-full dark:bg-dark dark:hover:bg-dark-gray-soft">
+		<>
 			{
 				props.item.items ?
 					<div className="py-2 px-4 flex items-center cursor-pointer" onClick={toggleOpen}>
@@ -123,7 +124,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 					))}
 				</ul>
 			)}
-		</li>
+		</>
 	);
 }
 
