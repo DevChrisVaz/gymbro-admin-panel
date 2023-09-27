@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export type SidebarProps = {
+    className?: string;
     links: SidebarItemType[]
 }
 

@@ -25,9 +25,12 @@ const config: Config = {
       'dark-green': '#26BE81',
       'dark-gray': '#111111',
       'dark-gray-soft': '#2d2d2d',
+      'error': '#ff0000'
     },
     extend: {
       textColor: {
+        'black': '#111111',
+        'white': '#FFFFFF',
         'primary': '#27be82',
       },
       backgroundColor: {

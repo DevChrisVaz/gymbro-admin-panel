@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
 
 	return (
-		<div ref={sidebarRef} className={`h-screen ${isVisible ? 'w-[250px]' : 'w-0 md:w-[62px]'} bg-light dark:bg-dark border-r border-r-primary-500 text-white fixed top-0 left-0 transition-all duration-300 overflow-hidden`}>
+		<div ref={sidebarRef} className={`h-screen ${isVisible ? 'w-[300px]' : 'w-0 md:w-[62px]'} bg-light dark:bg-dark border-r border-r-primary-500 text-white top-0 left-0 transition-all duration-300 overflow-hidden`}>
 			<div className="flex items-center justify-between py-4 pl-2 pr-4">
 				<a href='/dashboard' className="focus:outline-none">
 					<Image className="min-w-[160px]" src="/img/logo/horizontal-logo.svg" alt='GYMBRO' width={160} height={0} />
@@ -121,7 +121,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 					{props.item.items.map((item, index) => (
 						<li key={index}>
 							<SidebarLink isSidebarOpen={props.isSidebarOpen} item={item} />
-						</li>	
+						</li>
 					))}
 				</ul>
 			)}

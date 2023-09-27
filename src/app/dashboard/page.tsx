@@ -6,6 +6,8 @@ import { AiFillHome, AiFillMail } from 'react-icons/ai';
 import { IoBarbell } from 'react-icons/io5';
 import { MdCardMembership } from 'react-icons/md';
 import React from 'react';
+import { LinkType } from '@/components/Navbar/Navbar.d';
+import { Layout } from '@/components/Layout';
 
 const links: SidebarItemType[] = [
     {
@@ -41,10 +43,39 @@ const links: SidebarItemType[] = [
     },
 ];
 
+const items: LinkType[] = [
+    {
+        label: "Home",
+        url: "/"
+    },
+    {
+        label: "Solutions",
+        url: "/solutions"
+    },
+    {
+        label: "Resources",
+        url: "/resources"
+    },
+    {
+        label: "Developers",
+        url: "/developers"
+    },
+    {
+        label: "Pricing",
+        // url: "/pricing",
+        dropdown: [
+            {
+                label: "Pricing",
+                url: "/pricing"
+            }
+        ]
+    }
+]
+
 const page = () => {
     return (
         <div className="flex">
-            <Sidebar links={links} />
+            <Layout sidebarLinks={links} navbarLinks={items} />
         </div>
     )
 }
