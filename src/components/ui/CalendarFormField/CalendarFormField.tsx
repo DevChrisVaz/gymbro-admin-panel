@@ -1,25 +1,18 @@
 import React, { ReactNode, useState } from 'react';
-import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 
-export type PasswordFormFieldProps = {
-	label: string;
-	name: string;
-	prefixIcon?: ReactNode;
+export type CalendarFormFieldProps = {
+	label: string,
+	type?: string,
+	name?: string
+	prefixIcon?: ReactNode
 }
 
-const PasswordFormField: React.FC<PasswordFormFieldProps> = (props) => {
-	const [showPassword, setShowPassword] = useState(false);
-	const [inputType, setInputType] = useState('password');
+const CalendarFormField: React.FC<CalendarFormFieldProps> = (props) => {
 	const [isFocused, setIsFocused] = useState(false);
 	const [inputValue, setInputValue] = useState('');
 
 	const onInputChange = (e: any) => {
 		setInputValue(e.target.value);
-	};
-
-	const togglePasswordVisibility = () => {
-		setShowPassword(!showPassword);
-		setInputType(showPassword ? 'password' : 'text');
 	};
 
 	const onFocus = () => {
@@ -32,7 +25,7 @@ const PasswordFormField: React.FC<PasswordFormFieldProps> = (props) => {
 
 	return (
 		<div className="mb-4 relative">
-			<div className="w-full flex dark:bg-dark bg-light rounded-md overflow-hidden border border-solid border-primary-500">
+			<div className="w-full flex dark:bg-dark bg-light rounded-md overflow-hidden border-solid border border-primary-500">
 				{
 					props.prefixIcon &&
 					<div className="w-[45px] flex items-center justify-center text-primary">
@@ -40,7 +33,7 @@ const PasswordFormField: React.FC<PasswordFormFieldProps> = (props) => {
 					</div>
 				}
 				<input
-					type={inputType}
+					type="date"
 					className={`w-full text-sm text-dark-gray dark:text-white dark:bg-dark bg-light ${isFocused || inputValue ? 'pt-5 pb-1' : 'py-2'} px-3 pr-10 focus:outline-none`}
 					onFocus={onFocus}
 					onBlur={onBlur}
@@ -57,16 +50,8 @@ const PasswordFormField: React.FC<PasswordFormFieldProps> = (props) => {
 			>
 				{props.label}
 			</label>
-			<button
-				type="button"
-				onClick={togglePasswordVisibility}
-				className="absolute inset-y-0 right-2 px-2 py-1 bg-gray-200 text-gray-700 rounded-md focus:outline-none hover:bg-gray-300"
-			>
-				{showPassword ? <BsEyeSlashFill className="text-white" /> : <BsEyeFill className="text-dark-grey dark:text-primary" />}
-			</button>
 		</div>
 	);
 };
 
-export default PasswordFormField;
-
+export default CalendarFormField;

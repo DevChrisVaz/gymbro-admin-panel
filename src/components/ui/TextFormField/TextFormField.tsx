@@ -3,7 +3,7 @@ import React, { ReactNode, useState } from 'react';
 export type TextFormFieldProps = {
 	label: string,
 	type?: string,
-	name?: string
+	name?: string,
 	prefixIcon?: ReactNode
 }
 
@@ -25,7 +25,7 @@ const TextFormField: React.FC<TextFormFieldProps> = (props) => {
 
 	return (
 		<div className="mb-4 relative">
-			<div className="w-full flex dark:bg-dark bg-light rounded-md overflow-hidden">
+			<div className="w-full flex dark:bg-dark bg-light rounded-md overflow-hidden border-solid border border-primary-500">
 				{
 					props.prefixIcon &&
 					<div className="w-[45px] flex items-center justify-center text-primary">

@@ -141,12 +141,10 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 				}
 			</div>
 			<div className="flex">
-				{
-					childrenWithProps
-				}
+				{childrenWithProps}
 
 				<div className="flex items-center gap-6">
-					<Button onClick={() => router.push("/login")} className="bg-gradient text-white">Sign In</Button>
+					<Button onClick={() => router.push("/joining-request")} className="bg-gradient text-white">Únete</Button>
 					{
 						isOpen ?
 							<FiX onClick={toggleMenu} className="text-primary text-3xl cursor-pointer md:hidden" />
