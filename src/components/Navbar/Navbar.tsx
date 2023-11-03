@@ -142,7 +142,6 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 			</div>
 			<div className="flex">
 				{childrenWithProps}
-
 				<div className="flex items-center gap-6">
 					<Button onClick={() => router.push("/joining-request")} className="bg-gradient text-white">Únete</Button>
 					{

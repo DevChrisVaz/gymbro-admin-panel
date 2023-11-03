@@ -4,6 +4,8 @@ import { MdArrowForwardIos } from 'react-icons/md';
 import { FiX } from 'react-icons/fi';
 import { GiWeight } from 'react-icons/gi';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Url } from 'next/dist/shared/lib/router/router';
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -111,10 +113,15 @@ const SidebarLink: React.FC<SidebarLinkProps> = (props) => {
 						</div>
 					</div>
 					:
-					<a href={props.item.url} className="py-2 px-4 flex items-center">
+					// <a href={props.item.url} className="py-2 px-4 flex items-center">
+					// 	<span className="mr-6">{props.item.icon}</span>
+					// 	<span className="text-dark-gray dark:text-white">{props.item.label}</span>
+					// </a>
+
+					<Link href={props.item.url as Url} className="py-2 px-4 flex items-center">
 						<span className="mr-6">{props.item.icon}</span>
 						<span className="text-dark-gray dark:text-white">{props.item.label}</span>
-					</a>
+					</Link>
 			}
 			{props.item.items && (
 				<ul ref={dropdownItemsContainerRef} className="h-0 overflow-hidden duration-300">
