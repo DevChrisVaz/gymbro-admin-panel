@@ -115,7 +115,7 @@ function PlansPage() {
                         >
                             <div className="flex items-center gap-3 xl:p-5">
                                 <div className="flex-shrink-0">
-                                    <Image src={brand.logo} alt="Brand" width={60} height={60} className=' rounded-full'/>
+                                    <Image src={brand.logo} alt="Brand" width={60} height={60} className=' rounded-full' />
                                 </div>
                                 <p className="hidden text-black dark:text-white sm:block">
                                     {brand.name}
@@ -137,7 +137,7 @@ function PlansPage() {
                             <div className="hidden items-center justify-center sm:flex xl:p-5">
                                 <p className="text-black dark:text-white">{brand.sales}</p>
                             </div>
-                            
+
                             <div className="hidden items-center justify-center sm:flex xl:p-5">
                                 <div className="mb-6 text-xl font-semibold text-black dark:text-white flex items-center">
                                     <Button onClick={() => router.push("/joining-request")} className="bg-gradient-to-t text-primary rounded-full mr-2">

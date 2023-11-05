@@ -1,13 +1,13 @@
 "use client"
 
 import React from 'react'
-import { Sidebar } from '@/components/Sidebar';
 import { SidebarItemType } from '@/components/Sidebar/Sidebar.d';
-import { AiFillHome, AiFillMail } from 'react-icons/ai';
+import { AiFillDollarCircle, AiFillHome, AiFillInfoCircle, AiFillMail, AiFillShop, AiOutlineTeam } from 'react-icons/ai';
 import { IoBarbell } from 'react-icons/io5';
 import { MdCardMembership } from 'react-icons/md';
 import { LinkType } from '@/components/Navbar/Navbar.d';
 import { Layout } from '@/components/Layout';
+import { BsFillPersonVcardFill } from 'react-icons/bs';
 
 const links: SidebarItemType[] = [
     {
@@ -16,30 +16,47 @@ const links: SidebarItemType[] = [
         icon: <AiFillHome className="text-primary text-[24px]" />,
     },
     {
-        label: 'Products',
-        url: '/products',
+        label: 'Mi Gimnasio',
+        url: '/',
         icon: <IoBarbell className="text-primary text-[24px]" />,
         isOpen: false,
         items: [
             {
-                label: 'Productos 1',
-                url: '/productos/1',
+                label: 'Información',
+                url: '/dashboard/info',
+                icon: <AiFillInfoCircle className="text-primary text-[24px]" />,
             },
             {
-                label: 'Productos 2',
-                url: '/productos/2',
+                label: 'Contacto',
+                url: '/dashboard/contact',
+                icon: <AiFillMail className="text-primary text-[24px]" />,
             },
         ],
     },
     {
+        label: 'Usuarios',
+        url: '/dashboard/users',
+        icon: <BsFillPersonVcardFill className="text-primary text-[24px]" />,
+    },
+    {
         label: 'Planes',
         url: '/dashboard/plans',
+        icon: <AiFillDollarCircle className="text-primary text-[24px]" />,
+    },
+    {
+        label: 'Clientes',
+        url: '/dashboard/costumers',
+        icon: <AiOutlineTeam className="text-primary text-[24px]" />,
+    },
+    {
+        label: 'Suscripciones',
+        url: '/dashboard/suscriptions',
         icon: <MdCardMembership className="text-primary text-[24px]" />,
     },
     {
-        label: 'Contacto',
-        url: '/contact',
-        icon: <AiFillMail className="text-primary text-[24px]" />,
+        label: 'Sucursales',
+        url: '/dashboard/branches',
+        icon: <AiFillShop className="text-primary text-[24px]" />,
     },
 ];
 
@@ -79,7 +96,7 @@ export default function RootLayoutDashboard({
 }) {
     return (
         <div className="flex">
-            <Layout sidebarLinks={links} navbarLinks={items} children={children}/>
+            <Layout sidebarLinks={links} navbarLinks={items} children={children} />
         </div>
     )
 }
