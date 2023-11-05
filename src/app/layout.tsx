@@ -1,7 +1,19 @@
+// import "reflect-metadata";
+// import { container } from "tsyringe";
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Providers } from "@/redux/provider";
+// import { Axios } from "axios";
+// import { AxiosApiRestClient } from "@/data/frameworks/datasources/rest/axios/axios-implementation";
+// import axios from "@/data/frameworks/datasources/rest/axios/axios.config";
+
+// container.registerInstance(
+//   "AXIOS",
+//   axios
+// );
+
+// container.register("API_REST_CLIENT", AxiosApiRestClient);
 
 const inter = Inter({ subsets: ['latin'] })
 
