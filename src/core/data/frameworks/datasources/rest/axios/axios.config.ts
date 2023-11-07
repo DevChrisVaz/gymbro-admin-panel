@@ -1,9 +1,9 @@
 import axios from "axios";
 import { acceptHeaderInterceptor } from "./interceptors/accept-header.interceptor";
 
-axios.interceptors.request.use(acceptHeaderInterceptor)
+export const acceptHeaderInterceptorId = axios.interceptors.request.use(acceptHeaderInterceptor); 
 
 export default axios.create({
-    baseURL: "",
+    baseURL: "https://gymbro-services.onrender.com/api/",
     timeout: 1000
 });

@@ -6,14 +6,14 @@ export enum HttpMethod {
     PATCH
 }
 
-interface Succeeded {
+interface Succeeded<T> {
     type: "Succeeded",
-    data: any
+    data: T
 }
 
 interface Failed {
     type: "Failed",
-    data: any
+    message: any
 }
 
 interface Error {
@@ -21,22 +21,22 @@ interface Error {
     message: string;
 }
 
-export type APIResult = Succeeded | Failed | Error;
+export type APIResult<T = void> = Succeeded<T> | Failed | Error;
 
 export interface ApiRestClient {
     authorization(token: string, replaceInterceptor?: Boolean): void;
 
-    call(
+    call<T = void>(
         method: HttpMethod,
         url: string,
         {
             body,
             params,
-            // options
-        }: {
-            body: object,
-            params: object
-            // options
+            options
+        }?: {
+            body?: object,
+            params?: object
+            options?: any
         }
-    ): Promise<APIResult>;
+    ): Promise<APIResult<T>>;
 }

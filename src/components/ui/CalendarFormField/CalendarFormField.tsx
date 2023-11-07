@@ -1,17 +1,22 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 
 export type CalendarFormFieldProps = {
 	label: string,
 	type?: string,
-	name?: string
+	name?: string,
+	value?: string,
+	onChange?: (e: ChangeEvent<any>) => void,
 	prefixIcon?: ReactNode
 }
 
 const CalendarFormField: React.FC<CalendarFormFieldProps> = (props) => {
 	const [isFocused, setIsFocused] = useState(false);
-	const [inputValue, setInputValue] = useState('');
+	const [inputValue, setInputValue] = useState(props.value);
 
 	const onInputChange = (e: any) => {
+		if (props.onChange) {
+			props.onChange(e);
+		}
 		setInputValue(e.target.value);
 	};
 
@@ -22,6 +27,10 @@ const CalendarFormField: React.FC<CalendarFormFieldProps> = (props) => {
 	const onBlur = () => {
 		setIsFocused(false);
 	};
+
+	useEffect(() => {
+		setInputValue(props.value);
+	}, [props.value]);
 
 	return (
 		<div className="mb-4 relative">
