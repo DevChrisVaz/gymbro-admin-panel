@@ -46,7 +46,7 @@ const config: Config = {
     },
   },
   plugins: [
-
+    require("tailwindcss-animated")
   ],
   darkMode: 'class'
 }

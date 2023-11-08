@@ -11,6 +11,10 @@ export interface IToastContext {
     addToast: (toast: IToast) => void;
 }
 
+export interface ToastState {
+    toastList: IToast[]
+}
+
 export type ToastMapKey = "success" | "error" | "info" | "warning";
 
 export type ToastMap = {

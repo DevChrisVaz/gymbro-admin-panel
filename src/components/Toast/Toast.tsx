@@ -55,7 +55,7 @@ const Toast: React.FC<ToastProps> = (props) => {
 	const { icon, colors } = toastMap[props.type];
 
 	return (
-		<div className={`flex items-center ${colors.background} border-l-4 ${colors.border} rounded-md py-2 px-3 shadow-md mb-2`}>
+		<div className={`flex items-center ${colors.background} border-l-4 ${colors.border} rounded-md py-2 px-3 shadow-md mb-2 animate-fade-left animate-once animate-ease-out animate-normal`}>
 			<div className={`${colors.text} rounded-full bg-white mr-3`}>
 				{icon}
 			</div>

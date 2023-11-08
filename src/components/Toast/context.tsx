@@ -25,7 +25,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     const addToast = (newToast: IToast) => {
         const toast = addIdentifierToToast(newToast);
 
-        setToastList(prev => [toast, ...prev]);
+        setToastList(prev => [...prev, toast]);
 
         setTimeout(() => {
             deleteToast(toast.uuid);
@@ -48,7 +48,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
                     const { type, title, message } = toast;
 
                     return <Toast key={index} message={message} type={type} />
-                })}
+                }).reverse()}
             </div>
             {children}
         </ToastContext.Provider>
