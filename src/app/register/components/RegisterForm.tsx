@@ -4,13 +4,23 @@ import { AreaFormField } from '@/components/ui/AreaFormField';
 import { CalendarFormField } from '@/components/ui/CalendarFormField';
 import { PasswordFormField } from '@/components/ui/PasswordFormField';
 import { TextFormField } from '@/components/ui/TextFormField';
-import React from 'react';
+import React, { useState } from 'react';
 
 export type RegisterFormProps = {
 
 }
 
+interface IRegisterPage {
+  name: string,
+  email: string,
+  password: string
+}
+
+const initialState: IRegisterPage = { name: '', email: '', password: '' }
+
 const RegisterForm: React.FC<RegisterFormProps> = (props) => {
+  const [state, setState] = useState(initialState);
+  
   return (
     <>
       <div className="px-8 pt-6 mb-1 flex flex-col my-2">

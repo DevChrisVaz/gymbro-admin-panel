@@ -6,9 +6,10 @@ import Image from "next/image";
 import { SearchBar } from '@/components/ui/SearchBar';
 import { Button } from 'flowbite-react';
 import { useRouter } from 'next/navigation';
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 
-type BRAND = {
+
+type data = {
     logo: string;
     name: string;
     visitors: number;
@@ -17,7 +18,7 @@ type BRAND = {
     conversion: number;
 };
 
-const brandData: BRAND[] = [
+const dataData: data[] = [
     {
         logo: "https://www.bestgym.com.mx/storage/home-page/October2022/Pi91Mtw824ZU4RMpU3ej.jpg",
         name: "Google",
@@ -60,13 +61,35 @@ const brandData: BRAND[] = [
     },
 ];
 
-function PlansPage() {
-    const router = useRouter();
+async function loadPlans() {
+    const apiKey = "d5eab0a1c186b9b80f5a62919a953fb397c2c50d2b95f117fc1b368a840f08da";
 
+    const url = 'https://gymbro-services.onrender.com/api/plans'; // Reemplaza con la URL correcta
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'apikey': apiKey
+      }
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Respuesta:', data);
+      return data;
+    } else {
+      console.error('Error:', response.status, response.statusText);
+    }
+}
+
+async function PlansPage() {
+    const router = useRouter();
+    const plans = await loadPlans();
+            
     return (
         <>
             <Breadcrumb pageName={'Planes'} />
-            <div className="rounded-xl border border-stroke bg-dark-gray px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+            <div className="rounded-xl shadow-lg drop-shadow-xl border-stroke bg-dark-gray px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
                 <div className="mb-6 text-xl font-semibold text-black dark:text-white flex justify-between">
                     <SearchBar />
                     <Button onClick={() => router.push("/dashboard/plans/newplan")} className="bg-gradient text-white rounded-full">Nuevo +</Button>
@@ -105,37 +128,37 @@ function PlansPage() {
                         </div>
                     </div>
 
-                    {brandData.map((brand, key) => (
+                    {plans.map((plans : any) => (
                         <div
-                            className={`grid grid-cols-3 sm:grid-cols-6 ${key === brandData.length - 1
+                            className={`grid grid-cols-3 sm:grid-cols-6 ${plans.uuid === dataData.length - 1
                                 ? ""
                                 : "border-b border-stroke dark:border-strokedark"
                                 }`}
-                            key={key}
+                            key={plans.uuid}
                         >
                             <div className="flex items-center gap-3 xl:p-5">
                                 <div className="flex-shrink-0">
-                                    <Image src={brand.logo} alt="Brand" width={60} height={60} className=' rounded-full' />
+                                    <Image src='https://www.bestgym.com.mx/storage/home-page/October2022/Pi91Mtw824ZU4RMpU3ej.jpg' alt="data" width={60} height={60} className=' rounded-full' />
                                 </div>
                                 <p className="hidden text-black dark:text-white sm:block">
-                                    {brand.name}
+                                    {plans.name}
                                 </p>
                             </div>
 
                             <div className="flex items-center justify-center xl:p-5">
-                                <p className="text-black dark:text-white">{brand.visitors}K</p>
+                                <p className="text-black dark:text-white">{plans.description}K</p>
                             </div>
 
                             <div className="flex items-center justify-center xl:p-5">
-                                <p className="text-meta-3">${brand.revenues}</p>
+                                <p className="text-meta-3">{plans.duration}</p>
                             </div>
 
                             <div className="flex items-center justify-center xl:p-5">
-                                <p className="text-meta-3">${brand.revenues}</p>
+                                <p className="text-meta-3">${plans.price}</p>
                             </div>
 
                             <div className="hidden items-center justify-center sm:flex xl:p-5">
-                                <p className="text-black dark:text-white">{brand.sales}</p>
+                                <p className="text-black dark:text-white">{plans.status}</p>
                             </div>
 
                             <div className="hidden items-center justify-center sm:flex xl:p-5">
@@ -157,3 +180,7 @@ function PlansPage() {
 }
 
 export default PlansPage
+
+function axios(arg0: { method: string; url: string; data: any; headers: { apikey: string; }; }) {
+    throw new Error('Function not implemented.');
+}

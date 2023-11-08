@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { SearchBar } from '../ui/SearchBar';
 import { validateChild } from '@/core/utils/validateChild';
+import DropdownUser from './DropdownUser';
 
 const NavLink: React.FC<NavLinkProps> = (props) => {
 	const pathname = usePathname();
@@ -69,7 +70,7 @@ export const NavLinks: React.FC<NavLinksType> = (props) => {
 	);
 }
 
-const Navbar: React.FC<NavbarProps> = (props) => {
+const DashNavbar: React.FC<NavbarProps> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const menuRef = useRef<HTMLDivElement>(null);
@@ -142,7 +143,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 			</div>
 			<div className="flex">
 				{childrenWithProps}
-				<div className="flex items-center gap-6">
+				{/* <div className="flex items-center gap-6">
 					<Button onClick={() => router.push("/joining-request")} className="bg-gradient text-white">Únete</Button>
 					{
 						isOpen ?
@@ -150,10 +151,11 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 							:
 							<FiMenu onClick={toggleMenu} className="text-primary text-3xl cursor-pointer md:hidden" />
 					}
-				</div>
+				</div> */}
+                <DropdownUser/>
 			</div>
 		</nav>
 	);
 };
 
-export default Navbar;
+export default DashNavbar;
