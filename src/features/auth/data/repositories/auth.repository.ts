@@ -1,8 +1,8 @@
-import { autoInjectable } from "tsyringe";
+// import { autoInjectable } from "tsyringe";
 import { AuthRepository } from "../../domain/repositories/auth.repository";
 import type { AuthRemoteDataSource } from "../data-sources/auth-remote-data-source";
 
-@autoInjectable()
+// @autoInjectable()
 export class AuthRepositoryImpl implements AuthRepository {
     constructor(private authRemoteDataSource: AuthRemoteDataSource) { }
 
@@ -11,11 +11,12 @@ export class AuthRepositoryImpl implements AuthRepository {
 
         switch (response.type) {
             case "Succeeded":
-                console.log(response.data);
                 return response.data.token;
             case "Failed":
                 throw new Error();
             case "Error":
+                throw new Error();
+            default:
                 throw new Error();
         }
     }

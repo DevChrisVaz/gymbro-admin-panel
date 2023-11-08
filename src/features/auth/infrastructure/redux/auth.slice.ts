@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AxiosApiRestClient } from "@/data/frameworks/datasources/rest/axios/axios-implementation";
-import axiosConfig from "@/data/frameworks/datasources/rest/axios/axios.config";
 import { LoginUseCase } from "../../application/usecases/login-usecase";
 import { AuthRepositoryImpl } from "../../data/repositories/auth.repository";
 import { AuthRemoteDataSourceImpl } from "../../data/data-sources/auth-remote-data-source";
+import { AxiosApiRestClient } from "@/core/data/frameworks/datasources/rest/axios/axios-implementation";
+import axiosConfig from "@/core/data/frameworks/datasources/rest/axios/axios.config";
 
 type Status = "INITIAL" | "LOADING" | "SUCCEEDED" | "FAILED";
 
@@ -22,7 +22,6 @@ const initialState: AuthState = {
 export const login = createAsyncThunk("auth/login", async (payload: { userName: string, password: string }) => {
     const loginUseCase = new LoginUseCase(new AuthRepositoryImpl(new AuthRemoteDataSourceImpl(new AxiosApiRestClient(axiosConfig))));
     const response = await loginUseCase.run(payload.userName, payload.password);
-    console.log(response);
     return response;
 });
 
@@ -30,7 +29,7 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-
+        
     },
     extraReducers(builder) {
         builder
