@@ -1,62 +1,65 @@
-import { APIResult, ApiRestClient, HttpMethod } from "@/data/contracts/datasources/api-rest-client";
 import { Axios, AxiosRequestConfig, AxiosResponse, isAxiosError } from "axios";
-import { inject, injectable } from "tsyringe";
 import { authorizationInterceptor } from "./interceptors/authorization.interceptor";
+import { APIResult, ApiRestClient, HttpMethod } from "@/core/data/contracts/datasources/api-rest-client";
 
-@injectable()
 export class AxiosApiRestClient implements ApiRestClient {
 
-    constructor(@inject("AXIOS") private axiosClient: Axios) { }
+    constructor(private axiosClient: Axios) { }
+
+    replaceToken(token: string): void {
+        this.axiosClient.interceptors.request.clear();
+        this.axiosClient.interceptors.request.use(authorizationInterceptor(token));
+    }
 
     authorization(token?: string, replaceInterceptor?: Boolean | undefined): void {
-        if(replaceInterceptor) {
+        if (replaceInterceptor) {
             this.axiosClient.interceptors.request.clear();
             this.axiosClient.interceptors.request.use(authorizationInterceptor(token));
 
             return;
         }
 
-        let currentInterceptor;
+        // let currentInterceptor;
 
-        for (let interceptor in this.axiosClient.interceptors.request) {
-            if(interceptor == authorizationInterceptor) {
-                
-            }
-        }
+        // for (let interceptor in this.axiosClient.interceptors.request) {
+        //     if (interceptor == authorizationInterceptor) {
+
+        //     }
+        // }
     }
 
-    async call(
+    async call<T>(
         method: HttpMethod,
         url: string,
         { body, params, options }:
             {
-                body: object;
-                params: object;
+                body?: object;
+                params?: object;
                 options?: AxiosRequestConfig
             }
-    ): Promise<APIResult> {
+    ): Promise<APIResult<T>> {
         switch (method) {
             case HttpMethod.GET:
-                return this._get(url, params, options);
+                return this._get<T>(url, params, options);
             case HttpMethod.POST:
-                return this._post(url, { body, params, options });
+                return this._post<T>(url, { body, params, options });
             case HttpMethod.PUT:
-                return this._put(url, { body, params, options });
+                return this._put<T>(url, { body, params, options });
             case HttpMethod.DELETE:
-                return this._delete(url, { params, options });
+                return this._delete<T>(url, { params, options });
             case HttpMethod.PATCH:
-                return this._patch(url, { body, params, options });
+                return this._patch<T>(url, { body, params, options });
         }
     }
 
-    async _get(
+    async _get<T>(
         url: string,
-        params: object,
+        params?: object,
         options?: AxiosRequestConfig
-    ): Promise<APIResult> {
+    ): Promise<APIResult<T>> {
         try {
 
-            const response = await this.axiosClient.get(
+            const response = await this.axiosClient.get<T>(
                 url,
                 {
                     params,
@@ -75,23 +78,23 @@ export class AxiosApiRestClient implements ApiRestClient {
         }
     }
 
-    async _post(
+    async _post<T>(
         url: string,
         {
             body,
             params,
             options
         }: {
-            body: object,
-            params: object,
+            body?: object,
+            params?: object,
             options?: AxiosRequestConfig
         }
-    ): Promise<APIResult> {
+    ): Promise<APIResult<T>> {
         try {
-            const response = await this.axiosClient.post(
+            const response = await this.axiosClient.post<T>(
                 url,
+                body,
                 {
-                    body,
                     params,
                     ...options
                 },
@@ -107,25 +110,25 @@ export class AxiosApiRestClient implements ApiRestClient {
         }
     }
 
-    async _put(
+    async _put<T>(
         url: string,
         {
             body,
             params,
             options
         }: {
-            body: object,
-            params: object,
+            body?: object,
+            params?: object,
             options?: AxiosRequestConfig
         }
-    ): Promise<APIResult> {
+    ): Promise<APIResult<T>> {
         try {
-            const response = await this.axiosClient.put(
+            const response = await this.axiosClient.put<T>(
                 url,
+                body,
                 {
-                    body,
                     params,
-                    options
+                    ...options
                 }
             );
 
@@ -139,7 +142,7 @@ export class AxiosApiRestClient implements ApiRestClient {
         }
     }
 
-    async _delete(
+    async _delete<T>(
         url: string,
         {
             params,
@@ -148,9 +151,9 @@ export class AxiosApiRestClient implements ApiRestClient {
             params?: object,
             options?: AxiosRequestConfig
         }
-    ): Promise<APIResult> {
+    ): Promise<APIResult<T>> {
         try {
-            const response = await this.axiosClient.delete(
+            const response = await this.axiosClient.delete<T>(
                 url,
                 {
                     params,
@@ -168,7 +171,7 @@ export class AxiosApiRestClient implements ApiRestClient {
         }
     }
 
-    async _patch(
+    async _patch<T>(
         url: string,
         {
             body,
@@ -179,12 +182,12 @@ export class AxiosApiRestClient implements ApiRestClient {
             params?: Object,
             options?: AxiosRequestConfig
         }
-    ): Promise<APIResult> {
+    ): Promise<APIResult<T>> {
         try {
-            const response = await this.axiosClient.patch(
+            const response = await this.axiosClient.patch<T>(
                 url,
+                body,
                 {
-                    body,
                     params,
                     ...options
                 }
@@ -200,7 +203,7 @@ export class AxiosApiRestClient implements ApiRestClient {
         }
     }
 
-    _mapResponse(response?: AxiosResponse): APIResult {
+    _mapResponse<T>(response?: AxiosResponse): APIResult<T> {
         if (response != null) {
             if (response.status >= 200 && response.status <= 300) {
                 return {
@@ -210,7 +213,7 @@ export class AxiosApiRestClient implements ApiRestClient {
             } else {
                 return {
                     type: "Failed",
-                    data: response.data
+                    message: response.data.message
                 }
             }
         } else {
