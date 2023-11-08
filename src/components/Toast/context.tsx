@@ -1,9 +1,11 @@
 import { createContext, useState } from "react";
 import type { IToast, IToastContext } from "./Toast.d";
+import { Toast } from ".";
+import { v4 as uuid } from "uuid";
 
 export const ToastContext = createContext<IToastContext>({
     toastList: [],
-    setToastList: () => { },
+    addToast: () => { },
 });
 
 interface ToastProviderProps {
@@ -11,13 +13,44 @@ interface ToastProviderProps {
 }
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
-    const [toastList, setToastList] = useState<Array<IToast>>([]);
+    const [toastList, setToastList] = useState<Array<IToast & { uuid: string }>>([]);
+
+    const addIdentifierToToast = (toast: IToast): IToast & { uuid: string } => {
+        return {
+            uuid: uuid(),
+            ...toast
+        }
+    }
+
+    const addToast = (newToast: IToast) => {
+        const toast = addIdentifierToToast(newToast);
+
+        setToastList(prev => [toast, ...prev]);
+
+        setTimeout(() => {
+            deleteToast(toast.uuid);
+        }, 4500);
+    }
+
+    const deleteToast = (uuid: string) => {
+        setToastList(prev => prev.filter((toast) => toast.uuid !== uuid));
+    };
+
     const value = {
         toastList,
-        setToastList,
+        addToast
     };
 
     return (
-        <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
+        <ToastContext.Provider value={value}>
+            <div className="absolute right-0 top-[65px] mx-3">
+                {toastList.map((toast, index) => {
+                    const { type, title, message } = toast;
+
+                    return <Toast key={index} message={message} type={type} />
+                })}
+            </div>
+            {children}
+        </ToastContext.Provider>
     );
 };

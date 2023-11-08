@@ -7,8 +7,8 @@ export interface IToast {
 }
 
 export interface IToastContext {
-    toastList: Array<IToast & { uuid: string }>;
-    addToast: (toast: IToast) => void;
+    toastList: Array<IToast>;
+    setToastList: React.Dispatch<React.SetStateAction<Array<IToast>>>;
 }
 
 export type ToastMapKey = "success" | "error" | "info" | "warning";

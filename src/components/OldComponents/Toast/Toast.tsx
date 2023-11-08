@@ -1,5 +1,9 @@
-import React from 'react';
-import { ToastMap, ToastMapKey } from './Toast.d';
+import React, { useContext, useEffect, useState } from 'react';
+import { ToastContext } from './context';
+import { IToast, ToastMap } from './Toast.d';
+
+export type ToastProps = {
+}
 
 export const toastMap: ToastMap = {
 	success: {
@@ -46,22 +50,47 @@ export const toastMap: ToastMap = {
 	},
 };
 
-export type ToastProps = {
-	type: ToastMapKey;
-	message: string;
-}
+const Toast: React.FC<ToastProps> = ({ }) => {
+	const { toastList, setToastList } = useContext(ToastContext);
+	const [list, setList] = useState<Array<IToast>>([]);
 
-const Toast: React.FC<ToastProps> = (props) => {
-	const { icon, colors } = toastMap[props.type];
+	useEffect(() => {
+		setList([...toastList]);
+	}, [toastList]);
+
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+			if (list.length && toastList.length) {
+				if (toastList[0].message) deleteToast(toastList[0].message);
+			}
+		}, 4500);
+		return () => {
+			clearTimeout(timeoutId);
+		};
+	}, [toastList, list]);
+
+	const deleteToast = (message: string) => {
+		const newList = list.filter((toast) => toast.message !== message);
+		setToastList([...newList]);
+	};
 
 	return (
-		<div className={`flex items-center ${colors.background} border-l-4 ${colors.border} rounded-md py-2 px-3 shadow-md mb-2`}>
-			<div className={`${colors.text} rounded-full bg-white mr-3`}>
-				{icon}
-			</div>
-			<div className="text-white max-w-xs ">
-				{props.message}
-			</div>
+		<div className="absolute right-0 top-[65px] mx-3">
+			{list.map((toast, index) => {
+				const { type, title, message } = toast;
+				const { colors, icon } = toastMap[type];
+
+				return (
+					<div key={index} className={`flex items-center ${colors.background} border-l-4 ${colors.border} rounded-md py-2 px-3 shadow-md mb-2`}>
+						<div className={`${colors.text} rounded-full bg-white mr-3`}>
+							{icon}
+						</div>
+						<div className="text-white max-w-xs ">
+							{message}
+						</div>
+					</div>
+				);
+			})}
 		</div>
 	);
 };

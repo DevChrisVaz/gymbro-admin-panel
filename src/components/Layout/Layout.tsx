@@ -3,8 +3,7 @@ import { Sidebar } from '../Sidebar';
 import { SidebarItemType } from '../Sidebar/Sidebar.d';
 import { Navbar } from '../Navbar';
 import { LinkType, NavSize } from '../Navbar/Navbar.d';
-import { ToastProvider } from '../Toast/context';
-import { Toast } from '../Toast';
+import { ToastProvider } from '../Toast';
 
 export type LayoutProps = {
 	sidebarLinks: SidebarItemType[]
@@ -16,7 +15,6 @@ const Layout: React.FC<LayoutProps> = (props) => {
 	return (
 		<div className="w-screen h-screen flex overflow-hidden">
 			<ToastProvider>
-				<Toast />
 				<Sidebar links={props.sidebarLinks} />
 				<div className="w-full h-full overflow-auto">
 					<Navbar searchBar className="" size={NavSize.medium} items={props.navbarLinks}>
