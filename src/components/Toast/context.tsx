@@ -29,7 +29,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
 
         setTimeout(() => {
             deleteToast(toast.uuid);
-        }, 4500);
+        }, 5500);
     }
 
     const deleteToast = (uuid: string) => {

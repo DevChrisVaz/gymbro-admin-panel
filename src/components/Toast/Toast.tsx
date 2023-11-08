@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ToastMap, ToastMapKey } from './Toast.d';
 
 export const toastMap: ToastMap = {
@@ -53,9 +53,18 @@ export type ToastProps = {
 
 const Toast: React.FC<ToastProps> = (props) => {
 	const { icon, colors } = toastMap[props.type];
+	const toastRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		setTimeout(() => {
+			toastRef.current?.classList.remove("animate-normal");
+			toastRef.current?.classList.add("animate-reverse");
+		}, 4500)
+	}, []);
+
 
 	return (
-		<div className={`flex items-center ${colors.background} border-l-4 ${colors.border} rounded-md py-2 px-3 shadow-md mb-2 animate-fade-left animate-once animate-ease-out animate-normal`}>
+		<div ref={toastRef} className={`flex items-center ${colors.background} border-l-4 ${colors.border} rounded-md py-2 px-3 shadow-md mb-2 animate-fade-left animate-once animate-ease-out animate-normal`}>
 			<div className={`${colors.text} rounded-full bg-white mr-3`}>
 				{icon}
 			</div>
