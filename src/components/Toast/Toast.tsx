@@ -75,7 +75,7 @@ const Toast: React.FC<ToastProps> = ({ }) => {
 	};
 
 	return (
-		<div className="absolute right-0 top-0 m-5">
+		<div className="absolute right-0 top-[65px] mx-3">
 			{list.map((toast, index) => {
 				const { type, title, message } = toast;
 				const { colors, icon } = toastMap[type];
