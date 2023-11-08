@@ -71,7 +71,7 @@ const PasswordFormField: React.FC<PasswordFormFieldProps> = (props) => {
 				<button
 					type="button"
 					onClick={togglePasswordVisibility}
-					className="absolute inset-y-0 right-2 px-2 py-1 bg-gray-200 text-gray-700 rounded-md focus:outline-none hover:bg-gray-300"
+					className="absolute inset-y-0 right-2 px-2 py-1 text-gray-700 rounded-md focus:outline-none"
 				>
 					{showPassword ? <BsEyeSlashFill className="text-white" /> : <BsEyeFill className="text-dark-grey dark:text-primary" />}
 				</button>

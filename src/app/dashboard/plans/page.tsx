@@ -4,9 +4,9 @@ import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb'
 import React from 'react'
 import Image from "next/image";
 import { SearchBar } from '@/components/ui/SearchBar';
-import { Button } from 'flowbite-react';
 import { useRouter } from 'next/navigation';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import { Button } from '@/components/ui/Button';
 
 
 type data = {
@@ -65,27 +65,27 @@ async function loadPlans() {
     const apiKey = "d5eab0a1c186b9b80f5a62919a953fb397c2c50d2b95f117fc1b368a840f08da";
 
     const url = 'https://gymbro-services.onrender.com/api/plans'; // Reemplaza con la URL correcta
-    
+
     const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'apikey': apiKey
-      }
+        method: 'GET',
+        headers: {
+            'apikey': apiKey
+        }
     });
-    
+
     if (response.ok) {
-      const data = await response.json();
-      console.log('Respuesta:', data);
-      return data;
+        const data = await response.json();
+        console.log('Respuesta:', data);
+        return data;
     } else {
-      console.error('Error:', response.status, response.statusText);
+        console.error('Error:', response.status, response.statusText);
     }
 }
 
 async function PlansPage() {
     const router = useRouter();
     const plans = await loadPlans();
-            
+
     return (
         <>
             <Breadcrumb pageName={'Planes'} />
@@ -128,7 +128,7 @@ async function PlansPage() {
                         </div>
                     </div>
 
-                    {plans.map((plans : any) => (
+                    {plans.map((plans: any) => (
                         <div
                             className={`grid grid-cols-3 sm:grid-cols-6 ${plans.uuid === dataData.length - 1
                                 ? ""

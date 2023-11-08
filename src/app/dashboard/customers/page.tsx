@@ -4,9 +4,9 @@ import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb'
 import React from 'react'
 import Image from "next/image";
 import { SearchBar } from '@/components/ui/SearchBar';
-import { Button } from 'flowbite-react';
 import { useRouter } from 'next/navigation';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { Button } from '@/components/ui/Button';
 
 type COSTUMER = {
   logo: string;

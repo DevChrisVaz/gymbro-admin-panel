@@ -45,7 +45,7 @@ const links: SidebarItemType[] = [
     },
     {
         label: 'Clientes',
-        url: '/dashboard/costumers',
+        url: '/dashboard/customers',
         icon: <AiOutlineTeam className="text-primary text-[24px]" />,
     },
     {
