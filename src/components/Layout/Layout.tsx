@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
 				<div className="w-full h-full overflow-auto">
 					<Navbar searchBar className="" size={NavSize.medium} items={props.navbarLinks}>
 					</Navbar>
-					<section className="dark:bg-dark bg-light text-dark-green p-4 m-4">
+					<section className="dark:bg-dark bg-light text-dark-green p-4 m-14 mt-2">
 						{props.children}
 					</section>
 				</div>
