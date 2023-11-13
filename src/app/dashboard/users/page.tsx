@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import Loader from '@/components/Loader/Loader';
 import UsersTable from './UsersTable';
+import { SimpleTable } from '@/components/preline/Tables/SimpleTable';
+// import { SimpleTable } from '@/components/Tables/SimpleTable';
 
 function UsersPage() {
   const router = useRouter();
@@ -18,7 +20,28 @@ function UsersPage() {
           <SearchBar />
           <Button onClick={() => router.push("/dashboard/plans/newplan")} className="bg-gradient text-white rounded-full">Nuevo +</Button>
         </div>
-        <div className="flex flex-col">
+        <SimpleTable
+          columns={[
+            {
+              id: "firstName",
+              name: "Nombre(s)"
+            },
+            {
+              id: "lastName",
+              name: "Apellidos"
+            },
+            {
+              id: "status",
+              name: "Estado"
+            },
+            {
+              id: "userName",
+              name: "Nombre de usuario"
+            },
+          ]}
+          rows={[]}
+        />
+        {/* <div className="flex flex-col">
           <div className="grid grid-cols-3 rounded-t-xl bg-gray-2 dark:bg-meta-4 sm:grid-cols-7 bg-dark-gray-soft">
             <div className=" xl:p-5">
               <h5 className="text-sm font-medium uppercase xsm:text-base">
@@ -32,7 +55,7 @@ function UsersPage() {
             </div>
             <div className="text-center xl:p-5">
               <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Satatus
+                Status
               </h5>
             </div>
             <div className="hidden text-center sm:block xl:p-5">
@@ -59,10 +82,10 @@ function UsersPage() {
           <Suspense fallback={<Loader />}>
             <UsersTable />
           </Suspense>
-        </div>
+        </div> */}
       </div>
     </>
   )
 }
 
-export default UsersPage
+export default UsersPage;

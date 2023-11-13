@@ -12,7 +12,7 @@ import { BsFillPersonVcardFill } from 'react-icons/bs';
 const links: SidebarItemType[] = [
     {
         label: 'Home',
-        url: '/',
+        url: '/dashboard',
         icon: <AiFillHome className="text-primary text-[24px]" />,
     },
     {

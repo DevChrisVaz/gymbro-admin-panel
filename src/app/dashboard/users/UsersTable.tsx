@@ -13,7 +13,7 @@ async function loadUsers() {
     const response = await fetch(url, {
         method: 'GET',
         headers: {
-            'apikey': apiKey
+            'api_key': apiKey
         }
     });
 

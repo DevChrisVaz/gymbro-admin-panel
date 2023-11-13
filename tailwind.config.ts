@@ -4,6 +4,7 @@ const colors = require('tailwindcss/colors')
 const config: Config = {
   content: [
     "./node_modules/flowbite-react/**/*.js",
+    './node_modules/preline/dist/*.js',
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -46,7 +47,8 @@ const config: Config = {
     },
   },
   plugins: [
-    require("tailwindcss-animated")
+    require("tailwindcss-animated"),
+    require("preline/plugin")
   ],
   darkMode: 'class'
 }

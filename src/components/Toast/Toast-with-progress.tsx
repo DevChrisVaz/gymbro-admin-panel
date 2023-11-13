@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ToastMap, ToastMapKey } from './Toast.d';
 
 export const toastMap: ToastMap = {
@@ -53,15 +53,46 @@ export type ToastProps = {
 
 const Toast: React.FC<ToastProps> = (props) => {
 	const { icon, colors } = toastMap[props.type];
+	const [progressValue, setProgressValue] = useState<number>(0);
+
 	const toastRef = useRef<HTMLDivElement>(null);
+	const progressRef = useRef<HTMLDivElement>(null);
+
+	const durationInSeconds = 3.5;
+	const intervalMilliseconds = 10;
+
+	// useEffect(() => {
+	// 	setTimeout(() => {
+	// 		toastRef.current?.classList.remove("animate-normal");
+	// 		toastRef.current?.classList.add("animate-reverse");
+	// 	}, 4500);
+	// }, []);
+
+	useEffect(() => {
+		if (progressRef.current) {
+			const interval = setInterval(() => {
+				if (progressValue < 100) {
+					setProgressValue(prevValue => prevValue + (intervalMilliseconds / (durationInSeconds * 1000)) * 100);
+					progressRef.current!.style.width = `${progressValue}%`
+				}
+			}, intervalMilliseconds);
+
+			return () => clearInterval(interval);
+		}
+	}, [progressValue]);
 
 	return (
-		<div ref={toastRef} className={`w-[250px] flex items-center ${colors.background} border-l-4 ${colors.border} rounded-md py-2 px-3 shadow-md mb-2 animate-fade-left animate-once animate-ease-out animate-normal`}>
-			<div className={`${colors.text} rounded-full bg-white mr-3`}>
-				{icon}
+		<div ref={toastRef} className={`w-[200px] flex flex-col items-center ${colors.background} border-l-4 ${colors.border} rounded-md shadow-md mb-2 animate-fade-left animate-once animate-ease-out animate-normal`}>
+			<div className="flex py-2 px-3">
+				<div className={`${colors.text} rounded-full bg-white mr-3`}>
+					{icon}
+				</div>
+				<div className="text-white max-w-xs">
+					{props.message}
+				</div>
 			</div>
-			<div className="text-white max-w-xs ">
-				{props.message}
+			<div className="bg-gray-300 h-1 rounded w-full">
+				<div ref={progressRef} className={`h-full ${colors.background} rounded-r`}></div>
 			</div>
 		</div>
 	);
