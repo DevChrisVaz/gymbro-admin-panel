@@ -39,5 +39,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "files": ["./node_modules/redux-persist/types/storage/index.d.ts"],
 }

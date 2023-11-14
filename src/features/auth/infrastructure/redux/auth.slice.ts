@@ -19,7 +19,7 @@ const initialState: AuthState = {
     error: null
 };
 
-export const login = createAsyncThunk("auth/login", async (payload: { userName: string, password: string }) => {
+export const login = createAsyncThunk("auth/users", async (payload: { userName: string, password: string }) => {
     const loginUseCase = new LoginUseCase(new AuthRepositoryImpl(new AuthRemoteDataSourceImpl(new AxiosApiRestClient(axiosConfig))));
     const response = await loginUseCase.run(payload.userName, payload.password);
     return response;
@@ -29,7 +29,7 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        
+
     },
     extraReducers(builder) {
         builder

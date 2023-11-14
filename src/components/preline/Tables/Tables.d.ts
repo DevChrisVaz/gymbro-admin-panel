@@ -7,6 +7,7 @@ export interface Header {
 type TableProps = {
     columns: Header[];
     rows: T[];
+    isLoading?: boolean;
 }
 
 export type SimpleTableProps = TableProps & {

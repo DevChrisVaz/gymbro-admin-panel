@@ -1,16 +1,15 @@
 "use client"
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb'
-import React, { Suspense } from 'react'
+import React, { useState } from 'react'
 import { SearchBar } from '@/components/ui/SearchBar';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
-import Loader from '@/components/Loader/Loader';
-import UsersTable from './UsersTable';
 import { SimpleTable } from '@/components/preline/Tables/SimpleTable';
-// import { SimpleTable } from '@/components/Tables/SimpleTable';
 
 function UsersPage() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const router = useRouter();
   return (
     <>
@@ -40,6 +39,7 @@ function UsersPage() {
             },
           ]}
           rows={[]}
+          isLoading={isLoading}
         />
         {/* <div className="flex flex-col">
           <div className="grid grid-cols-3 rounded-t-xl bg-gray-2 dark:bg-meta-4 sm:grid-cols-7 bg-dark-gray-soft">

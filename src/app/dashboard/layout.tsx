@@ -8,6 +8,7 @@ import { MdCardMembership } from 'react-icons/md';
 import { LinkType } from '@/components/Navbar/Navbar.d';
 import { Layout } from '@/components/Layout';
 import { BsFillPersonVcardFill } from 'react-icons/bs';
+import { ReduxProvider } from '@/redux/provider';
 
 const links: SidebarItemType[] = [
     {
@@ -96,7 +97,9 @@ export default function RootLayoutDashboard({
 }) {
     return (
         <div className="flex">
-            <Layout sidebarLinks={links} navbarLinks={items} children={children} />
+            <ReduxProvider>
+                <Layout sidebarLinks={links} navbarLinks={items} children={children} />
+            </ReduxProvider>
         </div>
     )
 }
