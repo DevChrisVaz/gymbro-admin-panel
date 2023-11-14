@@ -1,12 +1,11 @@
-import { autoInjectable } from "tsyringe";
 import type { AuthRepository } from "../../domain/repositories/auth.repository";
+import { ICredentials } from "../../domain/entities/login.entity";
 
-@autoInjectable()
 export class LoginUseCase {
     constructor(private authRepository: AuthRepository) { }
 
-    async run(userName: string, password: string) {
-        let response = await this.authRepository.login(userName, password);
+    async run(credentials: ICredentials) {
+        let response = await this.authRepository.login(credentials);
         return response;
     }
 }

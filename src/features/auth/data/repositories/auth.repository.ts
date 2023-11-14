@@ -1,16 +1,20 @@
-// import { autoInjectable } from "tsyringe";
+import { ICredentials } from "../../domain/entities/login.entity";
 import { AuthRepository } from "../../domain/repositories/auth.repository";
+import { AuthLocalDataSource } from "../data-sources/auth-local-data-source";
 import type { AuthRemoteDataSource } from "../data-sources/auth-remote-data-source";
 
-// @autoInjectable()
 export class AuthRepositoryImpl implements AuthRepository {
-    constructor(private authRemoteDataSource: AuthRemoteDataSource) { }
+    constructor(
+        private authRemoteDataSource: AuthRemoteDataSource,
+        private authLocalDataSource: AuthLocalDataSource
+    ) { }
 
-    async login(userName: string, password: string): Promise<string> {
-        const response = await this.authRemoteDataSource.login(userName, password);
+    async login(credentials: ICredentials): Promise<string> {
+        const response = await this.authRemoteDataSource.login(credentials);
 
         switch (response.type) {
             case "Succeeded":
+                this.authLocalDataSource.saveToken(response.data.token);
                 return response.data.token;
             case "Failed":
                 throw new Error();

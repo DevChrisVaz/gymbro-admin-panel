@@ -1,9 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { Sidebar } from '../Sidebar';
 import { SidebarItemType } from '../Sidebar/Sidebar.d';
 import { Navbar } from '../Navbar';
 import { LinkType, NavSize } from '../Navbar/Navbar.d';
 import { ToastProvider } from '../Toast';
+import { useRouter } from 'next/navigation';
+import { AuthLocalDataSourceImpl } from '@/features/auth/data/data-sources/auth-local-data-source';
 
 export type LayoutProps = {
 	sidebarLinks: SidebarItemType[]
@@ -12,6 +14,16 @@ export type LayoutProps = {
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
+
+	const router = useRouter();
+
+	useEffect(() => {
+		const authLocalDataSource = new AuthLocalDataSourceImpl();
+		if (!authLocalDataSource.getToken()) {
+			router.push("/login");
+		}
+	}, []);
+
 	return (
 		<div className="w-screen h-screen flex overflow-hidden">
 			<ToastProvider>
